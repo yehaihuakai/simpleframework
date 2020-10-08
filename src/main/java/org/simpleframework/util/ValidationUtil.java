@@ -17,7 +17,27 @@ public class ValidationUtil {
      * @param obj the obj
      * @return the boolean
      */
-    public static boolean isEmpty(Collection<?> obj){
-        return obj == null || obj.isEmpty();
+    public static boolean isEmpty(Collection<?> obj) {
+        return null == obj || obj.isEmpty();
+    }
+
+    /**
+     * Is empty boolean.
+     *
+     * @param objs the objs
+     * @return the boolean
+     */
+    public static boolean isEmpty(Object[] objs) {
+        return null == objs || objs.length == 0;
+    }
+
+    /**
+     * String是否为null或""
+     *
+     * @param obj String
+     * @return 是否为空
+     */
+    public static boolean isEmpty(String obj) {
+        return (null == obj || "".equals(obj));
     }
 }

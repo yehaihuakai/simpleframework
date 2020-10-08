@@ -197,7 +197,7 @@ public class BeanContainer {
      * @param interfaceOrClass the interface or class
      * @return the class by super
      */
-    public Set<Class<?>> getClassBySuper(Class<?> interfaceOrClass) {
+    public Set<Class<?>> getClassesBySuper(Class<?> interfaceOrClass) {
         Set<Class<?>> classSet = new HashSet<>();
 
         // 1.获取beanMap的所有class对象

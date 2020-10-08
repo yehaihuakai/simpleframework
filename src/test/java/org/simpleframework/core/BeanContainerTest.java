@@ -56,7 +56,7 @@ public class BeanContainerTest {
     @Test
     public void getClassBySuperTest() {
         Assertions.assertEquals(true, beanContainer.isLoaded());
-        Assertions.assertEquals(true, beanContainer.getClassBySuper(HeadLineShopCategoryService.class)
+        Assertions.assertEquals(true, beanContainer.getClassesBySuper(HeadLineShopCategoryService.class)
                 .contains(HeadLineShopCategoryServiceImpl.class));
     }
 }

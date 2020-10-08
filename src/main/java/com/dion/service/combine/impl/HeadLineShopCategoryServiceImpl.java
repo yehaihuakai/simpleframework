@@ -8,6 +8,7 @@ import com.dion.service.combine.HeadLineShopCategoryService;
 import com.dion.service.solo.HeadLineService;
 import com.dion.service.solo.ShopCategoryService;
 import org.simpleframework.core.annotation.Service;
+import org.simpleframework.inject.annotation.Autowired;
 
 import java.util.List;
 
@@ -19,8 +20,10 @@ import java.util.List;
 @Service
 public class HeadLineShopCategoryServiceImpl implements HeadLineShopCategoryService {
 
+    @Autowired(value = "HeadLineServiceImpl2")
     private HeadLineService headLineService;
 
+    @Autowired
     private ShopCategoryService shopCategoryService;
 
     @Override

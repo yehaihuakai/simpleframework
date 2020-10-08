@@ -4,6 +4,7 @@ import com.dion.entity.bo.ShopCategory;
 import com.dion.entity.dto.Result;
 import com.dion.service.solo.ShopCategoryService;
 import org.simpleframework.core.annotation.Controller;
+import org.simpleframework.inject.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +16,9 @@ import java.util.List;
  * @date: 2020/10/03
  **/
 @Controller
-public class ShopCategoryOperationCOntroller {
+public class ShopCategoryOperationController {
 
+    @Autowired
     private ShopCategoryService shopCategoryService;
 
     public Result<Boolean> addshopCategory(HttpServletRequest req, HttpServletResponse resp) {

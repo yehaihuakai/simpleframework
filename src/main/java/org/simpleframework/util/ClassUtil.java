@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.File;
 import java.io.FileFilter;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
@@ -145,6 +146,24 @@ public class ClassUtil {
             return (T) constructor.newInstance();
         } catch (Exception e) {
             log.error("newInstance error", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Sets field.
+     *
+     * @param field      the field
+     * @param target     the target
+     * @param value      the value
+     * @param accessible the accessible
+     */
+    public static void setField(Field field, Object target, Object value, boolean accessible) {
+        field.setAccessible(accessible);
+        try {
+            field.set(target, value);
+        } catch (IllegalAccessException e) {
+            log.error("setField error:", e);
             throw new RuntimeException(e);
         }
     }
