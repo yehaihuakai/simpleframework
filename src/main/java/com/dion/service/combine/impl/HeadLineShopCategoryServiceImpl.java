@@ -7,6 +7,7 @@ import com.dion.entity.dto.Result;
 import com.dion.service.combine.HeadLineShopCategoryService;
 import com.dion.service.solo.HeadLineService;
 import com.dion.service.solo.ShopCategoryService;
+import org.simpleframework.core.annotation.Service;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @author: liyang07
  * @date: 2020/10/03
  **/
+@Service
 public class HeadLineShopCategoryServiceImpl implements HeadLineShopCategoryService {
 
     private HeadLineService headLineService;

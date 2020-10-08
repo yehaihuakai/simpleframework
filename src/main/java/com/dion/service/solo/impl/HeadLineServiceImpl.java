@@ -3,6 +3,7 @@ package com.dion.service.solo.impl;
 import com.dion.entity.bo.HeadLine;
 import com.dion.entity.dto.Result;
 import com.dion.service.solo.HeadLineService;
+import org.simpleframework.core.annotation.Service;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author: liyang07
  * @date: 2020/10/03
  **/
+@Service
 public class HeadLineServiceImpl implements HeadLineService {
     @Override
     public Result<Boolean> addHeadLine(HeadLine headLine) {

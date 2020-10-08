@@ -3,6 +3,7 @@ package com.dion.controller.superadmin;
 import com.dion.entity.bo.ShopCategory;
 import com.dion.entity.dto.Result;
 import com.dion.service.solo.ShopCategoryService;
+import org.simpleframework.core.annotation.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author: liyang07
  * @date: 2020/10/03
  **/
+@Controller
 public class ShopCategoryOperationCOntroller {
 
     private ShopCategoryService shopCategoryService;

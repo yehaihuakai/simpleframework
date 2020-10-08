@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +24,9 @@ public class ClassUtil {
      * The constant FILE_PROTOCOL.
      */
     public static final String FILE_PROTOCOL = "file";
+    /**
+     * The constant CLASS_SUFFIX.
+     */
     public static final String CLASS_SUFFIX = ".class";
 
     /**
@@ -122,6 +126,25 @@ public class ClassUtil {
             return Class.forName(className);
         } catch (ClassNotFoundException e) {
             log.error("load class error:", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 实例化class
+     *
+     * @param <T>        the type parameter
+     * @param clazz      the clazz
+     * @param accessible 是否支持创建出私有class对象的实例
+     * @return the t
+     */
+    public static <T> T newInstance(Class<?> clazz, boolean accessible) {
+        try {
+            Constructor constructor = clazz.getDeclaredConstructor();
+            constructor.setAccessible(accessible);
+            return (T) constructor.newInstance();
+        } catch (Exception e) {
+            log.error("newInstance error", e);
             throw new RuntimeException(e);
         }
     }
