@@ -11,10 +11,7 @@ import org.simpleframework.util.ClassUtil;
 import org.simpleframework.util.ValidationUtil;
 
 import java.lang.annotation.Annotation;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -115,5 +112,107 @@ public class BeanContainer {
      */
     public int size() {
         return beanMap.size();
+    }
+
+
+    /**
+     * Add bean object.
+     *
+     * @param clazz the clazz
+     * @param bean  the bean
+     * @return the object
+     */
+    public Object addBean(Class<?> clazz, Object bean) {
+        return beanMap.put(clazz, bean);
+    }
+
+    /**
+     * Remove bean object.
+     *
+     * @param clazz the clazz
+     * @return the object
+     */
+    public Object removeBean(Class<?> clazz) {
+        return beanMap.remove(clazz);
+    }
+
+    /**
+     * Get bean object.
+     *
+     * @param clazz the clazz
+     * @return the object
+     */
+    public Object getBean(Class<?> clazz) {
+        return beanMap.get(clazz);
+    }
+
+    /**
+     * Get classes set.
+     *
+     * @return the set
+     */
+    public Set<Class<?>> getClasses() {
+        return beanMap.keySet();
+    }
+
+    /**
+     * Gets beans.
+     *
+     * @return the beans
+     */
+    public Set<Object> getBeans() {
+        return new HashSet<>(beanMap.values());
+    }
+
+    /**
+     * Gets class by annotation.
+     *
+     * @param annotation the annotation
+     * @return the class by annotation
+     */
+    public Set<Class<?>> getClassByAnnotation(Class<? extends Annotation> annotation) {
+        Set<Class<?>> classSet = new HashSet<>();
+
+        // 1.获取beanMap的所有class对象
+        Set<Class<?>> keySet = getClasses();
+        if (ValidationUtil.isEmpty(keySet)) {
+            log.warn("nothing in beanMap");
+            return classSet;
+        }
+
+        // 2.通过注解筛选被注解标记的class对象，并添加到classSet里
+        for (Class<?> clazz : keySet) {
+            // 类是否有相关注解的标记
+            if (clazz.isAnnotationPresent(annotation)) {
+                classSet.add(clazz);
+            }
+        }
+        return classSet;
+    }
+
+    /**
+     * Gets class by super.
+     * 根据接口或父类获取实现类或子类的Class集合，不包括其本身
+     *
+     * @param interfaceOrClass the interface or class
+     * @return the class by super
+     */
+    public Set<Class<?>> getClassBySuper(Class<?> interfaceOrClass) {
+        Set<Class<?>> classSet = new HashSet<>();
+
+        // 1.获取beanMap的所有class对象
+        Set<Class<?>> keySet = getClasses();
+        if (ValidationUtil.isEmpty(keySet)) {
+            log.warn("nothing in beanMap");
+            return classSet;
+        }
+
+        // 2.判断keySet里面的元素是否是传入的接口或者类的子类，如果是，添加到classSet里面
+        for (Class<?> clazz : keySet) {
+            if (interfaceOrClass.isAssignableFrom(clazz) && !clazz.equals(interfaceOrClass)) {
+                classSet.add(clazz);
+            }
+        }
+        return classSet;
     }
 }
